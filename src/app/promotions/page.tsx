@@ -3,7 +3,7 @@
 import { Location } from "./location";
 import Filters, { allFilterSlugs, FilterEnum } from "./filters";
 import { useState } from "react";
-import Entry, { EntryType } from "./entry";
+import Entry, { EntryType, Promotion } from "./entry";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Promotions() {
@@ -98,82 +98,102 @@ function Section({ children }: Readonly<{ children?: React.ReactNode }>) {
     return <h1 className="self-start text-2xl font-bold pl-1">{children}</h1>;
 }
 
-const entries: EntryType[] = [
-    {
-        title: "Wszystkie Sushi -15%",
-        img: "/entries/sushi.jpg",
-        date: new Date("2024-03-29"),
-        priceOld: 52.0,
-        priceNew: 44.2,
-    },
-    {
-        title: "Rogaliki -20%",
-        img: "/entries/rogaliki.jpg",
-        date: new Date("2024-03-30"),
-        priceOld: 7.0,
-        priceNew: 5.6,
-    },
-    {
-        title: "Kanapka z łososiem -20%",
-        img: "/entries/losos.jpg",
-        date: new Date("2024-03-30"),
-        priceOld: 19.5,
-        priceNew: 15.6,
-    },
-    {
-        title: "Lunch -15%",
-        img: "/entries/Lunch.jpg",
-        date: new Date("2024-03-30"),
-        priceOld: 29.5,
-        priceNew: 25.0,
-    },
-    {
-        title: "Kawa -15%",
-        img: "/entries/Kawa.jpg",
-        date: new Date("2024-03-30"),
-        priceOld: 15.0,
-        priceNew: 12.75,
-    },
-    {
-        title: "Wrap z Tofu -10%",
-        img: "/entries/wrap_tofu.jpg",
-        date: new Date("2024-03-30"),
-        priceOld: 18.5,
-        priceNew: 16.65,
-    },
-    {
-        title: "Sałatka z kurczakiem -25%",
-        img: "/entries/kurczak.jpg",
-        date: new Date("2024-03-30"),
-        priceOld: 18.5,
-        priceNew: 13.8,
-    },
-    {
-        title: "Smoothie Owocowe -15%",
-        img: "/entries/smoothie.jpg",
-        date: new Date("2024-03-30"),
-        priceOld: 16.0,
-        priceNew: 13.6,
-    },
-    {
-        title: "Pizza Margherita -20%",
-        img: "/entries/pizza.jpg",
-        date: new Date("2024-03-30"),
-        priceOld: 28.0,
-        priceNew: 22.4,
-    },
-    {
-        title: "Muffin Czekoladowy -10%",
-        img: "/entries/muffin.jpg",
-        date: new Date("2024-03-30"),
-        priceOld: 8.0,
-        priceNew: 7.2,
-    },
-    {
-        title: "Zupa Pomidorowa -25%",
-        img: "/entries/zupa.jpg",
-        date: new Date("2024-03-30"),
-        priceOld: 14.0,
-        priceNew: 10.5,
-    },
-].map((entry, i) => ({ ...entry, id: i }));
+const entries: EntryType[] = (
+    [
+        {
+            title: "Serwis rowerów",
+            type: "event",
+            img: "/entries/sushi.jpg",
+            date: new Date("2024-04-04"),
+            brief: "Całkowicie za darmo!",
+        },
+        {
+            title: "Wszystkie Sushi -15%",
+            type: "promotion",
+            img: "/entries/sushi.jpg",
+            date: new Date("2024-03-29"),
+            priceOld: 52.0,
+            priceNew: 44.2,
+        },
+        {
+            title: "Rogaliki -20%",
+            type: "promotion",
+            img: "/entries/rogaliki.jpg",
+            date: new Date("2024-03-30"),
+            priceOld: 7.0,
+            priceNew: 5.6,
+        },
+        {
+            title: "Kanapka z łososiem -20%",
+            type: "promotion",
+            img: "/entries/losos.jpg",
+            date: new Date("2024-03-30"),
+            priceOld: 19.5,
+            priceNew: 15.6,
+        },
+        {
+            title: "Lunch -15%",
+            type: "promotion",
+            img: "/entries/Lunch.jpg",
+            date: new Date("2024-03-30"),
+            priceOld: 29.5,
+            priceNew: 25.0,
+        },
+        {
+            title: "Kawa -15%",
+            type: "promotion",
+            img: "/entries/Kawa.jpg",
+            date: new Date("2024-03-30"),
+            priceOld: 15.0,
+            priceNew: 12.75,
+        },
+        {
+            title: "Wrap z Tofu -10%",
+            type: "promotion",
+            img: "/entries/wrap_tofu.jpg",
+            date: new Date("2024-03-30"),
+            priceOld: 18.5,
+            priceNew: 16.65,
+        },
+        {
+            title: "Sałatka z kurczakiem -25%",
+            type: "promotion",
+            img: "/entries/kurczak.jpg",
+            date: new Date("2024-03-30"),
+            priceOld: 18.5,
+            priceNew: 13.8,
+        },
+        {
+            title: "Smoothie Owocowe -15%",
+            type: "promotion",
+            img: "/entries/smoothie.jpg",
+            date: new Date("2024-03-30"),
+            priceOld: 16.0,
+            priceNew: 13.6,
+        },
+        {
+            title: "Pizza Margherita -20%",
+            type: "promotion",
+            img: "/entries/pizza.jpg",
+            date: new Date("2024-03-30"),
+            priceOld: 28.0,
+            priceNew: 22.4,
+        },
+        {
+            title: "Muffin Czekoladowy -10%",
+            type: "promotion",
+            img: "/entries/muffin.jpg",
+            date: new Date("2024-03-30"),
+            priceOld: 8.0,
+            priceNew: 7.2,
+        },
+        {
+            title: "Zupa Pomidorowa -25%",
+            type: "promotion",
+            img: "/entries/zupa.jpg",
+            date: new Date("2024-03-30"),
+            priceOld: 14.0,
+            priceNew: 10.5,
+        },
+    ] as const
+).map((entry, i) => ({ ...entry, id: i }));
