@@ -7,6 +7,7 @@ const allFilters = [
     { slug: "events", label: "Wydarzenia" },
 ] as const;
 
+export const allFilterSlugs = allFilters.map((filter) => filter.slug);
 export type FilterEnum = (typeof allFilters)[number]["slug"];
 
 export default function Filters({
@@ -20,11 +21,11 @@ export default function Filters({
         active.includes(filter.slug)
     );
     return (
-        <div className="flex gap-2">
+        <div className="flex gap-2 justify-stretch">
             <Filter
                 onClick={() => {
                     if (onChanged === undefined) return;
-                    onChanged(allFilters.map((filter) => filter.slug));
+                    onChanged(allFilterSlugs);
                 }}
                 isActive={isAllActive}
             >
@@ -45,9 +46,7 @@ export default function Filters({
                                 );
                                 onChanged(
                                     filtered.length === 0
-                                        ? allFilters.map(
-                                              (filter) => filter.slug
-                                          )
+                                        ? allFilterSlugs
                                         : filtered
                                 );
                             } else onChanged([filter.slug]);
@@ -72,7 +71,7 @@ function Filter({
     React.ComponentProps<"span">) {
     return (
         <Badge
-            className="text-sm cursor-pointer"
+            className="text-sm cursor-pointer grow"
             variant={isActive ? "default" : "outline"}
             {...props}
         >
