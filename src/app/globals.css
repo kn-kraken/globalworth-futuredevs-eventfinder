@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@custom-variant dark (&:where(.never-match, .never-match *));
+
 :root {
     --background: oklch(
         0.97 0 0
@@ -14,12 +16,12 @@
         0.55 0.18 25
     ); /* Red color for primary buttons as seen in screenshot */
     --primary-foreground: oklch(0.985 0 0);
-    --secondary: oklch(0.97 0 0);
+    --secondary: oklch(1 0 0);
     --secondary-foreground: oklch(0.205 0 0);
     --muted: oklch(0.97 0 0);
     --muted-foreground: oklch(0.556 0 0);
-    --accent: #feb3b2;
-    --accent-foreground: oklch(0.205 0 0);
+    --accent: oklch(0.97 0 0);
+    --accent-foreground: oklch(0.43 0.25 27.08);
     --destructive: oklch(0.577 0.245 27.325);
     --destructive-foreground: oklch(0.577 0.245 27.325);
     --border: oklch(0.922 0 0);
@@ -79,53 +81,4 @@
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-ring: var(--sidebar-ring);
     --white-variant: true; /* Setting white variant to true */
-}
-
-/* Additional styles for shadcn components */
-@layer base {
-    * {
-        @apply border-border outline-ring/50;
-    }
-    body {
-        @apply bg-background text-foreground;
-    }
-
-    /* White variant configuration - only white theme available */
-    :root {
-        --white-variant: true;
-        --theme-mode: "light"; /* Force light mode only */
-    }
-
-    /* Disable any dark mode classes that might be added by shadcn */
-    .dark,
-    [data-theme="dark"] {
-        display: none !important;
-    }
-
-    /* Button styling to match the red buttons in the screenshot */
-    .btn-primary,
-    .button-primary,
-    [class*="button-primary"] {
-        background-color: var(--primary);
-        color: white;
-        border-radius: var(--radius);
-    }
-
-    /* Card styling for the white cards in the screenshot */
-    .card {
-        background-color: white;
-        border-radius: var(--radius);
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    }
-
-    /* Menu item styling */
-    .menu-item {
-        padding: 0.75rem 1rem;
-        font-weight: 500;
-    }
-
-    /* Icon styling for the red icons */
-    .icon-primary {
-        color: var(--primary);
-    }
 }

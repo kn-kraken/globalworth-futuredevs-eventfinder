@@ -14,7 +14,10 @@ export default function Navbar() {
         router.push(page == "home" ? "/" : "/promotions");
     }
     return (
-        <div className="absolute bottom-0 w-full bg-[#1F2125] rounded-t-4xl flex p-5 gap-5 justify-evenly text-white">
+        <div
+            className="absolute bottom-0 w-full bg-secondary rounded-t-4xl flex p-5 gap-5 justify-evenly text-secondary-foreground
+        -foreground"
+        >
             <Button
                 isActive={activeButton == "home"}
                 onClick={() => navigate("home")}
@@ -60,7 +63,7 @@ function Button({
         <button
             className={cn(
                 "flex flex-col gap-1 items-center transition-colors duration-200 cursor-pointer",
-                isActive && "text-accent"
+                isActive && "text-accent-foreground"
             )}
             onClick={onClick}
         >
