@@ -1,37 +1,43 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-type ButtonEnum = "home" | "manage" | "promotions" | "history";
+type Page = "home" | "manage" | "promotions" | "history";
 
 export default function Navbar() {
-  const [activeButton, setActiveButton] = useState<ButtonEnum>("home");
+  const [activeButton, setActiveButton] = useState<Page>("home");
+  const router = useRouter();
+  function navigate(page: Page) {
+    setActiveButton(page);
+    router.push(page == "home" ? "/" : "/promotions");
+  }
   return (
     <div className="absolute bottom-0 w-full bg-[#1F2125] rounded-t-4xl flex p-5 gap-5 justify-evenly text-white">
       <Button
         isActive={activeButton == "home"}
-        onClick={() => setActiveButton("home")}
+        onClick={() => navigate("home")}
       >
         <Lock />
         Pulpit
       </Button>
       <Button
         isActive={activeButton == "manage"}
-        onClick={() => setActiveButton("manage")}
+        onClick={() => navigate("manage")}
       >
         <User />
         Zarządzaj
       </Button>
       <Button
         isActive={activeButton == "promotions"}
-        onClick={() => setActiveButton("promotions")}
+        onClick={() => navigate("promotions")}
       >
         <QrCode />
         Promocje
       </Button>
       <Button
         isActive={activeButton == "history"}
-        onClick={() => setActiveButton("history")}
+        onClick={() => navigate("history")}
       >
         <Clock />
         Historia
