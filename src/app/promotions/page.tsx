@@ -4,6 +4,7 @@ import { Location } from "./location";
 import Filters, { allFilterSlugs, FilterEnum } from "./filters";
 import { useState } from "react";
 import Entry, { EntryType } from "./entry";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Promotions() {
     const [filters, setFilters] = useState<FilterEnum[]>(allFilterSlugs);
@@ -23,27 +24,54 @@ export default function Promotions() {
                 <Location />
                 <Filters active={filters} onChanged={setFilters} />
                 <div className="w-full flex flex-col gap-3">
-                    {favEntries.length > 0 && (
-                        <>
-                            <Section>Ulubione</Section>
-                            <div className="w-full overflow-auto">
-                                <div className="flex w-fit gap-2 mx-1 mt-1 mb-4">
-                                    {favEntries.map((entry) => {
-                                        return (
-                                            <Entry
-                                                key={entry.id}
-                                                entry={entry}
-                                                isFavourite={true}
-                                                onFavoutiteClicked={() =>
-                                                    onFavouriteClicked(entry)
-                                                }
-                                            />
-                                        );
-                                    })}
+                    <AnimatePresence mode="wait">
+                        {favEntries.length > 0 && (
+                            <motion.div
+                                initial={{ opacity: 0, height: 0 }}
+                                animate={{ opacity: 1, height: "auto" }}
+                                exit={{ opacity: 0, height: 0 }}
+                                transition={{ duration: 0.3 }}
+                            >
+                                <Section>Ulubione</Section>
+                                <div className="w-full overflow-auto">
+                                    <div className="flex w-fit gap-2 mx-1 mt-1 mb-4">
+                                        <AnimatePresence>
+                                            {favEntries.map((entry) => (
+                                                <motion.div
+                                                    key={entry.id}
+                                                    initial={{
+                                                        opacity: 0,
+                                                        scale: 0.9,
+                                                    }}
+                                                    animate={{
+                                                        opacity: 1,
+                                                        scale: 1,
+                                                    }}
+                                                    exit={{
+                                                        opacity: 0,
+                                                        scale: 0.9,
+                                                    }}
+                                                    transition={{
+                                                        duration: 0.3,
+                                                    }}
+                                                >
+                                                    <Entry
+                                                        entry={entry}
+                                                        isFavourite={true}
+                                                        onFavoutiteClicked={() =>
+                                                            onFavouriteClicked(
+                                                                entry
+                                                            )
+                                                        }
+                                                    />
+                                                </motion.div>
+                                            ))}
+                                        </AnimatePresence>
+                                    </div>
                                 </div>
-                            </div>
-                        </>
-                    )}
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
                     <Section>Oferty</Section>
                     <div className="w-full flex flex-col gap-2 pl-1">
                         {entries.map((entry) => {
@@ -65,6 +93,7 @@ export default function Promotions() {
         </div>
     );
 }
+
 function Section({ children }: Readonly<{ children?: React.ReactNode }>) {
     return <h1 className="self-start text-2xl font-bold pl-1">{children}</h1>;
 }
