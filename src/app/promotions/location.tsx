@@ -10,7 +10,8 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { MapPin } from "lucide-react";
+import { ChevronDown, ChevronUp, MapPin } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const locations = [
   "A4 Business Park",
@@ -50,13 +51,17 @@ const locations = [
 
 export function Location() {
   const [index, setIndex] = React.useState(26);
+  const [isOpen, setIsOpen] = React.useState(false);
 
   return (
-    <DropdownMenu>
+    <DropdownMenu onOpenChange={setIsOpen}>
       <DropdownMenuTrigger asChild>
         <Button className="w-full" variant="outline">
           <MapPin />
           {locations[index]}
+          <ChevronDown
+            className={cn("duration-300 ease-in-out", isOpen && "-rotate-180")}
+          />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-full h-[35vh]">
