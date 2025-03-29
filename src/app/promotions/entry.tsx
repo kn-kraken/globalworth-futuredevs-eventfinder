@@ -3,6 +3,7 @@ import { Calendar, Heart } from "lucide-react";
 import Image from "next/image";
 
 export interface EntryType {
+    id: number;
     title: string;
     img: string;
     date: Date;
@@ -13,9 +14,11 @@ export interface EntryType {
 export default function Entry({
     entry,
     isFavourite = false,
+    onFavoutiteClicked,
 }: {
     entry: EntryType;
     isFavourite?: boolean;
+    onFavoutiteClicked?: () => void;
 }) {
     return (
         <div className="w-72 bg-card rounded-2xl shadow-lg">
@@ -27,13 +30,21 @@ export default function Entry({
             <div className="p-1 px-2">
                 <div className="w-full flex">
                     <h1 className="text-lg font-bold grow">{entry.title}</h1>
-                    <Heart
-                        className={cn(
-                            "text-accent-foreground",
-                            isFavourite && "fill-accent-foreground",
-                            "cursor-pointer"
-                        )}
-                    />
+                    <div className="relative cursor-pointer">
+                        <Heart
+                            className="top-0 left-0 text-accent-foreground"
+                            onClick={onFavoutiteClicked}
+                        />
+                        <Heart
+                            className={cn(
+                                "absolute top-0 left-0",
+                                "text-accent-foreground fill-accent-foreground",
+                                "transition-opacity",
+                                !isFavourite && "opacity-0"
+                            )}
+                            onClick={onFavoutiteClicked}
+                        />
+                    </div>
                 </div>
                 <div className="pl-1">
                     <div className="text-sm font-light flex items-center gap-2">
