@@ -7,8 +7,15 @@ export interface EntryType {
     title: string;
     img: string;
     date: Date;
+}
+
+export interface Promotion extends EntryType {
     priceOld: number;
     priceNew: number;
+}
+
+export interface Event extends EntryType {
+    brief: string;
 }
 
 export default function Entry({
@@ -53,6 +60,7 @@ export default function Entry({
                     </div>
                 </div>
             </div>
+
             <div
                 className={cn(
                     "w-full px-2 py-1",
