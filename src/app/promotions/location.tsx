@@ -10,7 +10,7 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ChevronDown, ChevronUp, MapPin } from "lucide-react";
+import { ChevronDown, MapPin } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const locations = [
