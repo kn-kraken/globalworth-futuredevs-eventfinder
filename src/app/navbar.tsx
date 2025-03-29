@@ -1,5 +1,6 @@
 "use client";
 
+import cn from "@/utils/cn";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -57,10 +58,10 @@ function Button({
 }>) {
   return (
     <button
-      className="flex flex-col gap-2 items-center transition-colors duration-200 cursor-pointer"
-      style={{
-        color: isActive ? "var(--accent)" : "white",
-      }}
+      className={cn(
+        "flex flex-col gap-1 items-center transition-colors duration-200 cursor-pointer",
+        isActive && "text-accent",
+      )}
       onClick={onClick}
     >
       {children}
