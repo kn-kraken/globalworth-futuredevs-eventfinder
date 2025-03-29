@@ -56,7 +56,7 @@ export function Location() {
     return (
         <DropdownMenu onOpenChange={setIsOpen}>
             <DropdownMenuTrigger asChild>
-                <Button className="w-full" variant="outline">
+                <Button className="w-full cursor-pointer" variant="outline">
                     <MapPin />
                     {locations[index]}
                     <ChevronDown
@@ -73,7 +73,11 @@ export function Location() {
                     onValueChange={(i) => setIndex(parseInt(i))}
                 >
                     {locations.map((value, i) => (
-                        <DropdownMenuRadioItem key={i} value={i.toString()}>
+                        <DropdownMenuRadioItem
+                            key={i}
+                            value={i.toString()}
+                            className="cursor-pointer"
+                        >
                             {value}
                         </DropdownMenuRadioItem>
                     ))}

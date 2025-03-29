@@ -21,7 +21,7 @@ export default function Filters({
         active.includes(filter.slug)
     );
     return (
-        <div className="flex gap-2 justify-stretch">
+        <div className="flex w-full gap-2 justify-stretch">
             <Filter
                 onClick={() => {
                     if (onChanged === undefined) return;
