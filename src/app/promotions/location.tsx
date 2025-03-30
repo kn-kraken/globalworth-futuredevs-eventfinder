@@ -13,44 +13,20 @@ import {
 import { ChevronDown, MapPin } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const locations = [
-    "A4 Business Park",
-    "BOB",
-    "BOC",
-    "Batory Office Building I",
-    "City Offices",
-    "Company House I",
-    "Gara Herastrau",
-    "Globalworth Campus",
-    "Globalworth Plaza",
-    "Globalworth Square",
-    "Globalworth Tower",
-    "Green Court",
-    "Green Horizon",
-    "Lubicz Park",
-    "Lumen & Skylight",
-    "Nordic Park",
-    "Podium Park",
-    "Quattro Business Park",
-    "Renault Bucharest Connected",
-    "Retro Office House",
-    "Rondo Business Park",
-    "Silesia Star",
-    "Spektrum Tower",
-    "Tower Center International",
-    "Tryton Business House",
-    "UniCredit HQ",
-    "Warsaw Trade Tower",
-    "West Gate",
-    "West Link",
-    "Upground Tower",
-    "Hala Koszyki",
-    "Renoma",
-    "Supersam",
-];
+export interface LocationType {
+    id: number;
+    name: string;
+}
 
-export function Location() {
-    const [index, setIndex] = React.useState(0);
+export function Location({
+    locations,
+    chosenLocationId,
+    onChooseLocation,
+}: {
+    locations: LocationType[];
+    chosenLocationId: number;
+    onChooseLocation: (id: number) => void;
+}) {
     const [isOpen, setIsOpen] = React.useState(false);
 
     return (
@@ -58,7 +34,7 @@ export function Location() {
             <DropdownMenuTrigger asChild>
                 <Button className="w-full cursor-pointer" variant="outline">
                     <MapPin />
-                    {locations[index]}
+                    {locations.find((loc) => loc.id === chosenLocationId)!.name}
                     <ChevronDown
                         className={cn(
                             "duration-300 ease-in-out",
@@ -69,16 +45,16 @@ export function Location() {
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-full h-[35vh]">
                 <DropdownMenuRadioGroup
-                    value={index.toString()}
-                    onValueChange={(i) => setIndex(parseInt(i))}
+                    value={chosenLocationId.toString()}
+                    onValueChange={(i) => onChooseLocation(parseInt(i))}
                 >
-                    {locations.map((value, i) => (
+                    {locations.map((location) => (
                         <DropdownMenuRadioItem
-                            key={i}
-                            value={i.toString()}
+                            key={location.id}
+                            value={location.id.toString()}
                             className="cursor-pointer"
                         >
-                            {value}
+                            {location.name}
                         </DropdownMenuRadioItem>
                     ))}
                 </DropdownMenuRadioGroup>
