@@ -2,7 +2,6 @@
 
 import { Button } from "@/components/ui/button";
 import { EventData, Item, ProductData } from "@/lib/types";
-import { cn } from "@/lib/utils";
 import { randomBytes } from "crypto";
 import { motion } from "framer-motion";
 import { Clock, Heart, Share2, X } from "lucide-react";
@@ -18,6 +17,7 @@ import {
     DropdownMenuRadioGroup,
     DropdownMenuRadioItem,
 } from "@radix-ui/react-dropdown-menu";
+import { price } from "@/lib/utils";
 
 export default function ItemPreview({
     item,
@@ -37,7 +37,7 @@ export default function ItemPreview({
             <div className="w-full h-full relative flex flex-col text-md">
                 <button
                     onClick={close}
-                    className="p-2 absolute top-4 left-4 z-1 bg-black/70 grid place-items-center rounded-3xl"
+                    className="cursor-pointer p-2 absolute top-4 left-4 z-1 bg-black/70 grid place-items-center rounded-3xl"
                 >
                     <X className="text-primary-foreground w-6 h-6" />
                 </button>
@@ -107,9 +107,9 @@ function Product({ product }: { product: ProductData }) {
                 <div className="flex flex-col gap-2 p-4">
                     <div className="text-xl font-semibold text-foreground flex gap-2 items-baseline">
                         <span className="text-sm text-secondary-foreground line-through h-fit">
-                            {`${product.priceOld} zł`}
+                            {price(product.priceOld)}
                         </span>
-                        {`${product.priceNew} zł`}
+                        {price(product.priceNew)}
                     </div>
                     <span
                         className="text-xl text-accent-foreground ml-auto w-fit font-bold

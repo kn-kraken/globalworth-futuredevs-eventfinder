@@ -1,32 +1,33 @@
 import { JSX } from "react";
 
 export type Product = {
+    id: number;
     type: "product";
     data: ProductData;
 };
 
 export type ProductData = {
-    id: string;
     title: string;
+    locations: number[];
     description: string;
     img: string;
-    price: number;
     emoji: JSX.Element;
     date: Date;
-    priceOld: string;
-    priceNew: string;
+    priceOld: number;
+    priceNew: number;
     discount: string;
     logo: string;
     company: string;
 };
 
 export type Event = {
+    id: number;
     type: "event";
     data: EventData;
 };
 
 export type EventData = {
-    id: string;
+    locations: number[];
     description: string;
     img: string;
     title: string;

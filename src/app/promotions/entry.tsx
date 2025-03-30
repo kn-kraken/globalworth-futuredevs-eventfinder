@@ -1,41 +1,15 @@
-import { cn } from "@/lib/utils";
+import { Item } from "@/lib/types";
+import { cn, price } from "@/lib/utils";
 import { Calendar, Heart } from "lucide-react";
 import Image from "next/image";
 
-export interface Promotion {
-    id: number;
-    type: "promotion";
-    data: {
-        locations: number[];
-        title: string;
-        img: string;
-        date: Date;
-        priceOld: number;
-        priceNew: number;
-    };
-}
-
-export interface Event {
-    id: number;
-    type: "event";
-    data: {
-        locations: number[];
-        title: string;
-        img: string;
-        date: Date;
-        brief?: string;
-    };
-}
-
-export type EntryType = Promotion | Event;
-
 export default function Entry({
-    entry: { type, data },
+    item: { type, data },
     isFavourite = false,
     onFavoutiteClicked,
     onClick,
 }: {
-    entry: EntryType;
+    item: Item;
     isFavourite?: boolean;
     onFavoutiteClicked?: () => void;
     onClick?: () => void;
@@ -80,7 +54,7 @@ export default function Entry({
                 </div>
             </div>
 
-            {type === "promotion" && (
+            {type === "product" && (
                 <div
                     className={cn(
                         "w-full px-2 py-1",
@@ -98,8 +72,4 @@ export default function Entry({
             )}
         </div>
     );
-}
-
-function price(num: number): string {
-    return num.toFixed(2).replace(".", ",") + " zł";
 }

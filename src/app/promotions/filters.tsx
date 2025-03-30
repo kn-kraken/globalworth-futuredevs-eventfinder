@@ -3,7 +3,7 @@
 import { Badge } from "@/components/ui/badge";
 
 const allFilters = [
-    { slug: "promotion", label: "Promocje" },
+    { slug: "product", label: "Promocje" },
     { slug: "event", label: "Wydarzenia" },
 ] as const;
 

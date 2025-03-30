@@ -2,61 +2,31 @@
 
 import { Location } from "./location";
 import Filters, { allFilterSlugs, FilterEnum } from "./filters";
-import { useEffect, useState } from "react";
-import Entry, { EntryType } from "./entry";
+import { useState } from "react";
+import Entry from "./entry";
 import { motion, AnimatePresence } from "framer-motion";
 import ItemPreview from "@/components/item-preview";
+import { ShoppingBasket } from "lucide-react";
 import { Item } from "@/lib/types";
-import { Bike, ShoppingBasket } from "lucide-react";
-
-const mockProduct: Item = {
-    type: "product",
-    data: {
-        id: "1",
-        title: "Product 1",
-        description:
-            "<p>Co jest w ofercie?</p><p>👉 W Paczce większej możesz znaleźć produkty z regularnej oferty kawiarni Costa Coffee. Pamiętaj, że trudno przewidzieć, co pozostanie niesprzedane na koniec dnia, dlatego zawartość paczki to zawsze pyszna</p>",
-        img: "/orlen-station.jpeg",
-        price: 100,
-        emoji: <ShoppingBasket />,
-        date: new Date(),
-        priceOld: "25.00",
-        priceNew: "50.00",
-        discount: "50%",
-        logo: "/orlen.png",
-        company: "Orlen",
-    },
-};
-
-const mockEvent: Item = {
-    type: "event",
-    data: {
-        id: "1",
-        title: "Sample Event",
-        description:
-            "<p>Co jest w ofercie?</p><p>👉 W Paczce większej możesz znaleźć produkty z regularnej oferty kawiarni Costa Coffee. Pamiętaj, że trudno przewidzieć, co pozostanie niesprzedane na koniec dnia, dlatego zawartość paczki to zawsze pyszna</p>",
-        img: "https://ecsmedia.pl/cdn-cgi/image/format=webp,width=544,height=544,/c/cafe-belga-b-iext140323027.jpg",
-        date: new Date(),
-        emoji: <Bike />,
-        brief: "Sample event brief description",
-    },
-};
 
 export default function Promotions() {
     const [chosenLocId, setChosenLocId] = useState(0);
     const [filters, setFilters] = useState<FilterEnum[]>(allFilterSlugs);
     const [favourites, setFavourites] = useState<number[]>([3, 5, 6]);
 
-    const [showProduct, setShowProduct] = useState(false);
+    const [chosenItem, setChosenItem] = useState<Item | undefined>(undefined);
 
     const filtered = entries
-        .filter(({ data }) => data.locations.includes(chosenLocId))
+        .filter(({ data }) => {
+            console.log(data);
+            return data.locations.includes(chosenLocId);
+        })
         .filter(({ type }) => filters.includes(type));
     const favEntries = favourites
         .map((favId) => filtered.find(({ id }) => id === favId))
         .filter((entry) => entry !== undefined);
 
-    function onFavouriteClicked({ id }: EntryType) {
+    function onFavouriteClicked({ id }: Item) {
         if (favourites.includes(id))
             setFavourites(favourites.filter((j) => id != j));
         else setFavourites([id, ...favourites]);
@@ -65,10 +35,10 @@ export default function Promotions() {
     return (
         <div className="w-screen h-screen relative p-6 overflow-y-auto">
             <AnimatePresence>
-                {showProduct && (
+                {chosenItem !== undefined && (
                     <ItemPreview
-                        item={mockEvent}
-                        close={() => setShowProduct(false)}
+                        item={chosenItem}
+                        close={() => setChosenItem(undefined)}
                     />
                 )}
             </AnimatePresence>
@@ -112,7 +82,7 @@ export default function Promotions() {
                                                     }}
                                                 >
                                                     <Entry
-                                                        entry={entry}
+                                                        item={entry}
                                                         isFavourite={true}
                                                         onFavoutiteClicked={() =>
                                                             onFavouriteClicked(
@@ -120,7 +90,7 @@ export default function Promotions() {
                                                             )
                                                         }
                                                         onClick={() =>
-                                                            setShowProduct(true)
+                                                            setChosenItem(entry)
                                                         }
                                                     />
                                                 </motion.div>
@@ -138,11 +108,12 @@ export default function Promotions() {
                             return (
                                 <Entry
                                     key={entry.id}
-                                    entry={entry}
+                                    item={entry}
                                     isFavourite={isFavourite}
                                     onFavoutiteClicked={() =>
                                         onFavouriteClicked(entry)
                                     }
+                                    onClick={() => setChosenItem(entry)}
                                 />
                             );
                         })}
@@ -195,10 +166,20 @@ const locations = [
 
 const locationIds = locations.map((loc) => loc.id);
 
-const entries: EntryType[] = (
+const defaultInfo = {
+    description:
+        "<p>Co jest w ofercie?</p><p>👉 W Paczce większej możesz znaleźć produkty z regularnej oferty kawiarni Costa Coffee. Pamiętaj, że trudno przewidzieć, co pozostanie niesprzedane na koniec dnia, dlatego zawartość paczki to zawsze pyszna</p>",
+    emoji: <ShoppingBasket />,
+    date: new Date(),
+    discount: "50%",
+    logo: "/orlen.png",
+    company: "Orlen",
+};
+
+const entries: Item[] = (
     [
         {
-            type: "promotion",
+            type: "product",
             data: {
                 title: "Wszystkie Sushi -15%",
                 locations: locationIds,
@@ -209,7 +190,7 @@ const entries: EntryType[] = (
             },
         },
         {
-            type: "promotion",
+            type: "product",
             data: {
                 title: "Rogaliki -20%",
                 locations: locationIds.filter((id) => id != 0),
@@ -220,7 +201,7 @@ const entries: EntryType[] = (
             },
         },
         {
-            type: "promotion",
+            type: "product",
             data: {
                 title: "Kanapka z łososiem -20%",
                 locations: locationIds.filter((id) => id != 0),
@@ -231,7 +212,7 @@ const entries: EntryType[] = (
             },
         },
         {
-            type: "promotion",
+            type: "product",
             data: {
                 title: "Lunch -15%",
                 locations: locationIds,
@@ -242,7 +223,7 @@ const entries: EntryType[] = (
             },
         },
         {
-            type: "promotion",
+            type: "product",
             data: {
                 title: "Kawa -15%",
                 locations: locationIds.filter((id) => id != 0),
@@ -253,7 +234,7 @@ const entries: EntryType[] = (
             },
         },
         {
-            type: "promotion",
+            type: "product",
             data: {
                 title: "Wrap z Tofu -10%",
                 locations: locationIds.filter((id) => id != 0),
@@ -264,7 +245,7 @@ const entries: EntryType[] = (
             },
         },
         {
-            type: "promotion",
+            type: "product",
             data: {
                 title: "Sałatka z kurczakiem -25%",
                 locations: locationIds.filter((id) => id != 0),
@@ -275,7 +256,7 @@ const entries: EntryType[] = (
             },
         },
         {
-            type: "promotion",
+            type: "product",
             data: {
                 title: "Smoothie Owocowe -15%",
                 locations: locationIds.filter((id) => id != 0),
@@ -286,7 +267,7 @@ const entries: EntryType[] = (
             },
         },
         {
-            type: "promotion",
+            type: "product",
             data: {
                 title: "Pizza Margherita -20%",
                 locations: locationIds.filter((id) => id != 0),
@@ -297,7 +278,7 @@ const entries: EntryType[] = (
             },
         },
         {
-            type: "promotion",
+            type: "product",
             data: {
                 title: "Muffin Czekoladowy -10%",
                 locations: locationIds.filter((id) => id != 0),
@@ -308,7 +289,7 @@ const entries: EntryType[] = (
             },
         },
         {
-            type: "promotion",
+            type: "product",
             data: {
                 title: "Zupa Pomidorowa -25%",
                 locations: locationIds.filter((id) => id != 0),
@@ -441,4 +422,8 @@ const entries: EntryType[] = (
     ] as const
 )
     .toSorted((a, b) => a.data.date.valueOf() - b.data.date.valueOf())
-    .map((entry, i) => ({ ...entry, id: i }));
+    .map(({ data, ...rest }, i) => ({
+        ...rest,
+        data: { ...defaultInfo, ...data },
+        id: i,
+    }));
