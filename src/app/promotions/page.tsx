@@ -17,8 +17,6 @@ export default function Promotions() {
     const [favourites, setFavourites] = useState<number[]>([3, 5, 6]);
     const [registeredEvents, setRegisteredEvents] = useState<number[]>([]);
 
-    console.log(registeredEvents);
-
     const [chosenItem, setChosenItem] = useState<Item | undefined>(undefined);
 
     const [notification, setNotification] = useState<Item | undefined>(
@@ -76,7 +74,17 @@ export default function Promotions() {
             {confirmation !== undefined && (
                 <EventConfirmation
                     item={confirmation as unknown as Event}
-                    onClose={() => setConfirmation(undefined)}
+                    onClose={(didConfirm) => {
+                        if (!didConfirm) {
+                            setRegisteredEvents((prev) =>
+                                prev.filter((id) => id != confirmation.id)
+                            );
+                            setFavourites((prev) =>
+                                prev.filter((id) => id != confirmation.id)
+                            );
+                        }
+                        setConfirmation(undefined);
+                    }}
                 />
             )}
             <AnimatePresence>
@@ -89,6 +97,7 @@ export default function Promotions() {
                             onFavouriteClicked(chosenItem)
                         }
                         registerEvent={(id) => {
+                            setFavourites((prev) => [chosenItem.id, ...prev]);
                             setRegisteredEvents((prev) => [...prev, id]);
                         }}
                     />
@@ -493,8 +502,11 @@ const entries: Item[] = (
     ] as const
 )
     .toSorted((a, b) => a.data.date.valueOf() - b.data.date.valueOf())
-    .map(({ data, ...rest }, i) => ({
-        ...rest,
-        data: { ...defaultInfo, ...data },
-        id: i,
-    }));
+    .map(
+        ({ data, ...rest }, i) =>
+            ({
+                ...rest,
+                data: { ...defaultInfo, ...data },
+                id: i,
+            }) as unknown as Item
+    );

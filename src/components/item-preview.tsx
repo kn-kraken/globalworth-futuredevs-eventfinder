@@ -192,7 +192,11 @@ function Product({ product }: { product: ProductData }) {
                             "h-auto max-w-full w-full bg-primary text-primary",
                             isQrCodeLoading && "opacity-25"
                         )}
-                        value={Buffer.from(",105 oan298gvpa").toString("hex")}
+                        value={Buffer.from(
+                            isQrCodeLoading
+                                ? "29vfl4onibflkri"
+                                : "29p10a,8gv5 oan"
+                        ).toString("hex")}
                         viewBox={`0 0 256 256`}
                     />
                 </div>

@@ -51,7 +51,7 @@ export function EventConfirmation({
                         className="cursor-pointer"
                         onClick={() => onClose?.call(null, true)}
                     >
-                        Anuluj
+                        Wypisz się
                     </AlertDialogCancel>
                     <AlertDialogAction
                         className="cursor-pointer"
