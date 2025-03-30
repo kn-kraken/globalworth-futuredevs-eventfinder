@@ -271,6 +271,7 @@ const entries: Item[] = (
                 date: new Date("2025-04-06"),
                 priceOld: 52.0,
                 priceNew: 44.2,
+                discount: "15%",
             },
         },
         {
@@ -282,6 +283,7 @@ const entries: Item[] = (
                 date: new Date("2025-04-03"),
                 priceOld: 7.0,
                 priceNew: 5.6,
+                discount: "20%",
             },
         },
         {
@@ -293,18 +295,18 @@ const entries: Item[] = (
                 date: new Date("2025-04-01"),
                 priceOld: 19.5,
                 priceNew: 15.6,
+                discount: "20%",
             },
         },
         {
             type: "product",
             data: {
-                title: "Lunch",
+                title: "Lunch -15%",
                 locations: locationIds,
                 img: "/entries/Lunch.jpg",
                 date: new Date("2025-04-07"),
                 priceOld: 29.5,
                 priceNew: 25.0,
-                discount: "15%",
                 logo: "/barkoszyki.png",
                 company: "Bar Koszyki",
                 emoji: <CookingPot />,
@@ -314,6 +316,7 @@ const entries: Item[] = (
 <p>🥔 Pieczone ziemniaki</p>
 <p>🥗 Zestaw surówek</p>
 <p>🥤 Kompot</p>`,
+                discount: "15%",
             },
         },
         {
@@ -325,6 +328,7 @@ const entries: Item[] = (
                 date: new Date("2025-04-03"),
                 priceOld: 15.0,
                 priceNew: 12.75,
+                discount: "15%",
             },
         },
         {
@@ -336,6 +340,7 @@ const entries: Item[] = (
                 date: new Date("2025-04-10"),
                 priceOld: 18.5,
                 priceNew: 16.65,
+                discount: "10%",
             },
         },
         {
@@ -347,6 +352,7 @@ const entries: Item[] = (
                 date: new Date("2025-04-02"),
                 priceOld: 18.5,
                 priceNew: 13.8,
+                discount: "25%",
             },
         },
         {
@@ -358,6 +364,7 @@ const entries: Item[] = (
                 date: new Date("2025-04-09"),
                 priceOld: 16.0,
                 priceNew: 13.6,
+                discount: "15%",
             },
         },
         {
@@ -369,6 +376,7 @@ const entries: Item[] = (
                 date: new Date("2025-04-30"),
                 priceOld: 28.0,
                 priceNew: 22.4,
+                discount: "20%",
             },
         },
         {
@@ -380,6 +388,7 @@ const entries: Item[] = (
                 date: new Date("2025-04-30"),
                 priceOld: 8.0,
                 priceNew: 7.2,
+                discount: "10%",
             },
         },
         {
@@ -391,6 +400,7 @@ const entries: Item[] = (
                 date: new Date("2025-04-30"),
                 priceOld: 14.0,
                 priceNew: 10.5,
+                discount: "25%",
             },
         },
         {

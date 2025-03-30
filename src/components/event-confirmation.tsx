@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Event } from "@/lib/types";
 
-import { Calendar } from "lucide-react";
+import { Calendar, Clock } from "lucide-react";
 
 export function EventConfirmation({
     item,
@@ -34,6 +34,9 @@ export function EventConfirmation({
                             <div className="flex items-center gap-2">
                                 <Calendar size={16} strokeWidth={1.8} />{" "}
                                 {item.data.date.toLocaleDateString("pl-PL")}
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <Clock size={16} strokeWidth={1.8} /> 10:00
                             </div>
                             {"brief" in item.data && (
                                 <div> {item.data.brief}</div>

@@ -96,7 +96,7 @@ function Product({ product }: { product: ProductData }) {
             () => {
                 setIsQrCodeLoading(false);
             },
-            Math.random() * 1000 + 1000
+            Math.random() * 500 + 500
         );
 
         return () => {
