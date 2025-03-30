@@ -2,9 +2,45 @@
 
 import { Location } from "./location";
 import Filters, { allFilterSlugs, FilterEnum } from "./filters";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Entry, { EntryType } from "./entry";
 import { motion, AnimatePresence } from "framer-motion";
+import ItemPreview from "@/components/item-preview";
+import { Item } from "@/lib/types";
+import { Bike, ShoppingBasket } from "lucide-react";
+
+const mockProduct: Item = {
+    type: "product",
+    data: {
+        id: "1",
+        title: "Product 1",
+        description:
+            "<p>Co jest w ofercie?</p><p>👉 W Paczce większej możesz znaleźć produkty z regularnej oferty kawiarni Costa Coffee. Pamiętaj, że trudno przewidzieć, co pozostanie niesprzedane na koniec dnia, dlatego zawartość paczki to zawsze pyszna</p>",
+        img: "/orlen-station.jpeg",
+        price: 100,
+        emoji: <ShoppingBasket />,
+        date: new Date(),
+        priceOld: "25.00",
+        priceNew: "50.00",
+        discount: "50%",
+        logo: "/orlen.png",
+        company: "Orlen",
+    },
+};
+
+const mockEvent: Item = {
+    type: "event",
+    data: {
+        id: "1",
+        title: "Sample Event",
+        description:
+            "<p>Co jest w ofercie?</p><p>👉 W Paczce większej możesz znaleźć produkty z regularnej oferty kawiarni Costa Coffee. Pamiętaj, że trudno przewidzieć, co pozostanie niesprzedane na koniec dnia, dlatego zawartość paczki to zawsze pyszna</p>",
+        img: "https://ecsmedia.pl/cdn-cgi/image/format=webp,width=544,height=544,/c/cafe-belga-b-iext140323027.jpg",
+        date: new Date(),
+        emoji: <Bike />,
+        brief: "Sample event brief description",
+    },
+};
 
 export default function Promotions() {
     const [chosenLocId, setChosenLocId] = useState(0);
@@ -26,6 +62,14 @@ export default function Promotions() {
 
     return (
         <div className="w-screen h-screen relative p-6 overflow-y-auto">
+            {/* <AnimatePresence>
+                {showProduct && (
+                    <ItemPreview
+                        item={mockEvent}
+                        close={() => setShowProduct(false)}
+                    />
+                )}
+            </AnimatePresence> */}
             <div className="w-full pb-22 flex flex-col gap-3 items-center">
                 <Location
                     locations={locations}
