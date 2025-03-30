@@ -2,12 +2,13 @@
 
 import { Location } from "./location";
 import Filters, { allFilterSlugs, FilterEnum } from "./filters";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Entry from "./entry";
 import { motion, AnimatePresence } from "framer-motion";
 import ItemPreview from "@/components/item-preview";
 import { CookingPot, ShoppingBasket } from "lucide-react";
 import { Item } from "@/lib/types";
+import PushNotification from "@/components/notification";
 
 export default function Promotions() {
     const [chosenLocId, setChosenLocId] = useState(0);
@@ -16,11 +17,23 @@ export default function Promotions() {
 
     const [chosenItem, setChosenItem] = useState<Item | undefined>(undefined);
 
+    const [notification, setNotification] = useState<Item | undefined>(
+        undefined
+    );
+    const yoga = entries.find((entry) => entry.data.title === "Yoga")!;
+
+    useEffect(() => {
+        function onKey(ev: KeyboardEvent) {
+            if (ev.key == "e") {
+                setNotification(yoga);
+            }
+        }
+        window.addEventListener("keydown", onKey);
+        return () => window.removeEventListener("keydown", onKey);
+    });
+
     const filtered = entries
-        .filter(({ data }) => {
-            console.log(data);
-            return data.locations.includes(chosenLocId);
-        })
+        .filter(({ data }) => data.locations.includes(chosenLocId))
         .filter(({ type }) => filters.includes(type));
     const favEntries = favourites
         .map((favId) => filtered.find(({ id }) => id === favId))
@@ -33,7 +46,22 @@ export default function Promotions() {
     }
 
     return (
-        <div className="w-screen h-screen relative p-6 overflow-y-auto">
+        <div
+            className="w-screen h-screen relative p-6 overflow-y-auto"
+            onClick={() => {
+                setNotification(yoga);
+            }}
+        >
+            <AnimatePresence>
+                {notification !== undefined && (
+                    <PushNotification
+                        title="Potwierdź obecność na jutrzejszym wydarzeniu!"
+                        message={notification.data.title}
+                        onClose={() => setNotification(undefined)}
+                        onClick={() => setNotification(undefined)}
+                    />
+                )}
+            </AnimatePresence>
             <AnimatePresence>
                 {chosenItem !== undefined && (
                     <ItemPreview

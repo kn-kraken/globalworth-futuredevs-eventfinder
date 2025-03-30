@@ -15,8 +15,8 @@ export default function Entry({
     onClick?: () => void;
 }) {
     return (
-        <div className="w-72 bg-card rounded-2xl shadow-lg cursor-pointer">
-            <div className="p-1" onClick={onClick}>
+        <div className="w-72 bg-card rounded-2xl shadow-lg">
+            <div className="p-1 cursor-pointer" onClick={onClick}>
                 <div className="relative w-full h-40 rounded-2xl overflow-hidden">
                     <Image
                         src={data.img}
