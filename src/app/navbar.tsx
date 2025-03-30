@@ -39,7 +39,7 @@ export default function Navbar() {
                 onClick={() => navigate("promotions")}
             >
                 <QrCode />
-                Promocje
+                Oferty
             </Button>
             <Button
                 isActive={page == "history"}
