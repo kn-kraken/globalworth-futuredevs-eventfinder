@@ -224,6 +224,8 @@ const entries: Item[] = (
                 date: new Date("2025-04-07"),
                 priceOld: 29.5,
                 priceNew: 25.0,
+                logo: "/barkoszyki.png",
+                company: "Bar Koszyki",
                 emoji: <CookingPot />,
                 description: `<p>Dzisiejszy lunch zawiera:</p>
 <p>🍜 Zupę krem z białych warzyw</p>
@@ -330,6 +332,8 @@ const entries: Item[] = (
                 brief: "Relaks dla twojego ciała i umysłu",
                 description:
                     "Zapraszamy Was na yogę w Warsaw Trade Tower, gdzie z imponującym widokiem zadbamy o wytrzymałość fizyczną i redukcję stresu. W czasie zajęć wykonywane są ćwiczenia oddechowe, relaksacyjne oraz fizyczne o niskiej intensywności. Ćwiczenia wspomagają pracę nad sylwetką, prowadzą do usprawnienia całego ciała i znacząco poprawiają gibkość. Gwarantujemy świetne widoki i treningi na najwyższym poziomie!",
+                company: "Zdrofit",
+                logo: "/zdrofit.png",
             },
         },
         {

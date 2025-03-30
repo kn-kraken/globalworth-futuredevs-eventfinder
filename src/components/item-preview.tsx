@@ -107,17 +107,19 @@ function Product({ product }: { product: ProductData }) {
                             className="overflow-hidden object-cover rounded-full"
                         />
                     </div>
-                    <div className="text-sm font-semibold text-primary-foreground">
+                    <div className="text-2xl font-semibold text-primary-foreground">
                         {product.company}
                     </div>
                 </div>
 
-                <Image
-                    src={product.img}
-                    fill
-                    alt="Product Image"
-                    className="overflow-hidden object-fill"
-                />
+                <div className="h-full bg-black">
+                    <Image
+                        src={product.img}
+                        fill
+                        alt="Product Image"
+                        className="overflow-hidden object-fill opacity-80"
+                    />
+                </div>
             </div>
             <div className="flex h-fit w-full">
                 <div className="flex flex-col gap-2 p-4">
@@ -197,12 +199,14 @@ function Event({ event }: { event: EventData }) {
     return (
         <>
             <div className="h-64 w-full relative border-b-2 border-foreground">
-                <Image
-                    src={event.img}
-                    fill
-                    alt="event Image"
-                    className="overflow-hidden object-fill"
-                />
+                <div className="h-full bg-black">
+                    <Image
+                        src={event.img}
+                        fill
+                        alt="Event Image"
+                        className="overflow-hidden object-fill opacity-80"
+                    />
+                </div>
             </div>
             <div className="flex h-fit w-full">
                 <div className="flex flex-col gap-2 p-4">
