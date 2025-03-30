@@ -21,7 +21,7 @@ export default function Promotions() {
     function onFavouriteClicked(entry: EntryType) {
         if (favourites.includes(entry.id))
             setFavourites(favourites.filter((j) => entry.id != j));
-        else setFavourites([...favourites, entry.id]);
+        else setFavourites([entry.id, ...favourites]);
     }
 
     return (

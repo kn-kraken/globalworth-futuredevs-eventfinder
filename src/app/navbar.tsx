@@ -64,7 +64,7 @@ function Button({
     return (
         <button
             className={cn(
-                "flex flex-col gap-1 items-center transition-colors duration-200 cursor-pointer",
+                "flex flex-col gap-1 items-center transition-colors duration-300 cursor-pointer",
                 isActive && "text-accent-foreground"
             )}
             onClick={onClick}
