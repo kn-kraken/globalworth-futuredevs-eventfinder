@@ -250,7 +250,7 @@ function Event({
                 </div>
             </div>
             <div
-                className="flex flex-col gap-2 p-4 min-h-[24rem] max-h-[24rem] overflow-y-auto bg-primary text-primary-foreground"
+                className="flex flex-col gap-2 p-4 min-h-[23rem] max-h-[23rem] overflow-y-auto bg-primary text-primary-foreground"
                 dangerouslySetInnerHTML={{
                     __html: event.description,
                 }}
