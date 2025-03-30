@@ -32,7 +32,7 @@ export default function Entry({
                 <div className="w-full flex">
                     <h1 className="text-lg font-bold grow">
                         {data.title +
-                            (type === "product" ? " " + data.discount : "")}
+                            (type === "product" ? " -" + data.discount : "")}
                     </h1>
                     <div className="relative cursor-pointer">
                         <Heart
