@@ -38,7 +38,12 @@ export default function Entry({
         <div className="w-72 bg-card rounded-2xl shadow-lg">
             <div className="p-1">
                 <div className="relative w-full h-40 rounded-2xl overflow-hidden">
-                    <Image src={entry.img} fill alt="a" />
+                    <Image
+                        src={entry.img}
+                        fill
+                        alt="a"
+                        className="object-cover"
+                    />
                 </div>
             </div>
             <div className="p-2">
