@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { EventData, Item, ProductData } from "@/lib/types";
 import { randomBytes } from "crypto";
 import { motion } from "framer-motion";
-import { Clock, Heart, Share2, X } from "lucide-react";
+import { Calendar, Heart, Share2, X } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import QRCode from "react-qr-code";
@@ -74,7 +74,7 @@ function Product({ product }: { product: ProductData }) {
                             src={product.logo}
                             fill
                             alt="Logo"
-                            className="overflow-hidden object-fill rounded-full"
+                            className="overflow-hidden object-cover rounded-full"
                         />
                     </div>
                     <div className="text-sm font-semibold text-primary-foreground">
@@ -96,7 +96,7 @@ function Product({ product }: { product: ProductData }) {
                         {product.title}
                     </h1>
                     <p className="flex gap-2 text-xs items-center">
-                        <Clock /> Odbędzie się:{" "}
+                        <Calendar /> Odbędzie się:{" "}
                         {product.date.toLocaleDateString("pl-PL", {
                             month: "2-digit",
                             day: "2-digit",
@@ -124,7 +124,7 @@ function Product({ product }: { product: ProductData }) {
                 dangerouslySetInnerHTML={{ __html: product.description }}
             />
             <div className="grid place-items-center p-4 flex-1">
-                <div className="text-xl font-bold">Odbierz promocje</div>
+                <div className="text-xl font-bold">Odbierz promocję</div>
                 <div
                     style={{
                         height: "auto",
@@ -173,7 +173,7 @@ function Event({ event }: { event: EventData }) {
                         {event.title}
                     </h1>
                     <p className="flex gap-2 text-xs items-center">
-                        <Clock /> Odbędzie się:{" "}
+                        <Calendar /> Odbędzie się:{" "}
                         {event.date.toLocaleDateString("pl-PL", {
                             month: "2-digit",
                             day: "2-digit",

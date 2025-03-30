@@ -6,7 +6,7 @@ import { useState } from "react";
 import Entry from "./entry";
 import { motion, AnimatePresence } from "framer-motion";
 import ItemPreview from "@/components/item-preview";
-import { ShoppingBasket } from "lucide-react";
+import { CookingPot, ShoppingBasket } from "lucide-react";
 import { Item } from "@/lib/types";
 
 export default function Promotions() {
@@ -220,6 +220,13 @@ const entries: Item[] = (
                 date: new Date("2025-04-07"),
                 priceOld: 29.5,
                 priceNew: 25.0,
+                emoji: <CookingPot />,
+                description: `<p>Dzisiejszy lunch zawiera:</p>
+<p>🍜 Zupę krem z białych warzyw</p>
+<p>🍗 Pierś z kurczaka z mozarellą i suszonymi pomidorami</p>
+<p>🥔 Pieczone ziemniaki</p>
+<p>🥗 Zestaw surówek</p>
+<p>🥤 Kompot</p>`,
             },
         },
         {
@@ -317,6 +324,8 @@ const entries: Item[] = (
                 img: "/entries/yoga.jpg",
                 date: new Date("2025-04-06"),
                 brief: "Relaks dla twojego ciała i umysłu",
+                description:
+                    "Zapraszamy Was na yogę w Warsaw Trade Tower, gdzie z imponującym widokiem zadbamy o wytrzymałość fizyczną i redukcję stresu. W czasie zajęć wykonywane są ćwiczenia oddechowe, relaksacyjne oraz fizyczne o niskiej intensywności. Ćwiczenia wspomagają pracę nad sylwetką, prowadzą do usprawnienia całego ciała i znacząco poprawiają gibkość. Gwarantujemy świetne widoki i treningi na najwyższym poziomie!",
             },
         },
         {
