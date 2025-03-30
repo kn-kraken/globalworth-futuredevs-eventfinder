@@ -189,7 +189,8 @@ function Product({ product }: { product: ProductData }) {
                     )}
                     <QRCode
                         size={256}
-                        fgColor="var(--primary)"
+                        bgColor="var(--primary)"
+                        fgColor="white"
                         className={cn(
                             "h-auto max-w-full w-full bg-primary text-primary",
                             isQrCodeLoading && "opacity-25"
