@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import Entry from "./entry";
 import { motion, AnimatePresence } from "framer-motion";
 import ItemPreview from "@/components/item-preview";
-import { CookingPot, ShoppingBasket } from "lucide-react";
+import { CookingPot, Dumbbell, ShoppingBasket } from "lucide-react";
 import { Event, Item } from "@/lib/types";
 import PushNotification from "@/components/notification";
 import { EventConfirmation } from "@/components/event-confirmation";
@@ -390,13 +390,15 @@ const entries: Item[] = (
             data: {
                 title: "Yoga",
                 locations: locationIds.filter((id) => id != 0),
-                img: "/entries/yoga.jpg",
+                img: "/entries/yog.webp",
                 date: new Date("2025-04-06"),
+                emoji: <Dumbbell />,
                 brief: "Relaks dla twojego ciała i umysłu",
                 description:
                     "Zapraszamy Was na yogę w Warsaw Trade Tower, gdzie z imponującym widokiem zadbamy o wytrzymałość fizyczną i redukcję stresu. W czasie zajęć wykonywane są ćwiczenia oddechowe, relaksacyjne oraz fizyczne o niskiej intensywności. Ćwiczenia wspomagają pracę nad sylwetką, prowadzą do usprawnienia całego ciała i znacząco poprawiają gibkość. Gwarantujemy świetne widoki i treningi na najwyższym poziomie!",
                 company: "Zdrofit",
                 logo: "/zdrofit.png",
+                address: "Warsaw Trade Tower, siłownia F45",
             },
         },
         {

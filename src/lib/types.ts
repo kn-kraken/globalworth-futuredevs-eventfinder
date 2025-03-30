@@ -34,6 +34,7 @@ export type EventData = {
     date: Date;
     emoji: JSX.Element;
     brief: string;
+    address: string;
 };
 
 export type Item = Product | Event;

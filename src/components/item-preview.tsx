@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { EventData, Item, ProductData } from "@/lib/types";
 import { motion } from "framer-motion";
-import { Calendar, Check, Heart, Share2, X } from "lucide-react";
+import { Calendar, Check, Heart, MapPin, Share2, X } from "lucide-react";
 import Image from "next/image";
 import React, { useEffect } from "react";
 import QRCode from "react-qr-code";
@@ -103,7 +103,7 @@ function Product({ product }: { product: ProductData }) {
     }, []);
     return (
         <>
-            <div className="h-64 w-full relative border-b-2 border-foreground">
+            <div className="h-64 w-full relative border-b border-foreground">
                 <div className="absolute bottom-8 h-fit w-full mx-4 gap-4 z-2 flex items-center">
                     <div className="w-12 h-12 relative">
                         <Image
@@ -218,7 +218,7 @@ function Event({
 
     return (
         <>
-            <div className="h-64 w-full relative border-b-2 border-foreground">
+            <div className="h-64 w-full relative border-b border-foreground">
                 <div className="h-full bg-black">
                     <Image
                         src={event.img}
@@ -242,6 +242,11 @@ function Event({
                             year: "numeric",
                         })}
                     </p>
+                    {event.address && (
+                        <p className="flex gap-2 text-xs items-center">
+                            <MapPin /> {event.address}
+                        </p>
+                    )}
                 </div>
             </div>
             <div
