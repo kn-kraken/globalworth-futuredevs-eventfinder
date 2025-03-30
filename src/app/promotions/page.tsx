@@ -14,6 +14,9 @@ export default function Promotions() {
     const [chosenLocId, setChosenLocId] = useState(0);
     const [filters, setFilters] = useState<FilterEnum[]>(allFilterSlugs);
     const [favourites, setFavourites] = useState<number[]>([3, 5, 6]);
+    const [registeredEvents, setRegisteredEvents] = useState<number[]>([]);
+
+    console.log(registeredEvents);
 
     const [chosenItem, setChosenItem] = useState<Item | undefined>(undefined);
 
@@ -71,6 +74,9 @@ export default function Promotions() {
                         onFavouriteClicked={() =>
                             onFavouriteClicked(chosenItem)
                         }
+                        registerEvent={(id) => {
+                            setRegisteredEvents((prev) => [...prev, id]);
+                        }}
                     />
                 )}
             </AnimatePresence>
@@ -116,6 +122,9 @@ export default function Promotions() {
                                                     <Entry
                                                         item={entry}
                                                         isFavourite={true}
+                                                        isRegistered={registeredEvents.includes(
+                                                            entry.id
+                                                        )}
                                                         onFavoutiteClicked={() =>
                                                             onFavouriteClicked(
                                                                 entry
@@ -139,6 +148,9 @@ export default function Promotions() {
                             const isFavourite = favourites.includes(entry.id);
                             return (
                                 <Entry
+                                    isRegistered={registeredEvents.includes(
+                                        entry.id
+                                    )}
                                     key={entry.id}
                                     item={entry}
                                     isFavourite={isFavourite}

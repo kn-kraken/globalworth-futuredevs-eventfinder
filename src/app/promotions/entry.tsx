@@ -1,6 +1,6 @@
 import { Item } from "@/lib/types";
 import { cn, price } from "@/lib/utils";
-import { Calendar, Heart } from "lucide-react";
+import { Calendar, Check, Heart } from "lucide-react";
 import Image from "next/image";
 
 export default function Entry({
@@ -8,11 +8,13 @@ export default function Entry({
     isFavourite = false,
     onFavoutiteClicked,
     onClick,
+    isRegistered,
 }: {
     item: Item;
     isFavourite?: boolean;
     onFavoutiteClicked?: () => void;
     onClick?: () => void;
+    isRegistered: boolean;
 }) {
     return (
         <div className="w-72 bg-card rounded-2xl shadow-lg">
@@ -45,11 +47,16 @@ export default function Entry({
                         />
                     </div>
                 </div>
-                <div className="pl-1 text-sm font-light">
+                <div className="pl-1 text-sm font-light flex flex-col">
                     <div className="flex items-center gap-2">
                         <Calendar size={16} strokeWidth={1.8} />{" "}
                         {data.date.toLocaleDateString("pl-PL")}
                     </div>
+                    {isRegistered && (
+                        <div className="flex items-center gap-2">
+                            <Check size={16} strokeWidth={1.8} /> Zapisany 10:00
+                        </div>
+                    )}
                     {"brief" in data && <div> {data.brief}</div>}
                 </div>
             </div>

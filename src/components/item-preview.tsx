@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { EventData, Item, ProductData } from "@/lib/types";
 import { motion } from "framer-motion";
-import { Calendar, Heart, Share2, X } from "lucide-react";
+import { Calendar, Check, Heart, Share2, X } from "lucide-react";
 import Image from "next/image";
 import React, { useEffect } from "react";
 import QRCode from "react-qr-code";
@@ -23,11 +23,13 @@ export default function ItemPreview({
     close,
     isFavourite = false,
     onFavouriteClicked,
+    registerEvent,
 }: {
     item: Item;
     close: () => void;
     isFavourite?: boolean;
     onFavouriteClicked?: () => void;
+    registerEvent: (id: number) => void;
 }) {
     return (
         <motion.div
@@ -74,7 +76,11 @@ export default function ItemPreview({
                 {item.type == "product" ? (
                     <Product product={item.data} />
                 ) : (
-                    <Event event={item.data} />
+                    <Event
+                        event={item.data}
+                        id={item.id}
+                        registerEvent={registerEvent}
+                    />
                 )}
             </div>
         </motion.div>
@@ -121,7 +127,7 @@ function Product({ product }: { product: ProductData }) {
                     />
                 </div>
             </div>
-            <div className="flex h-fit w-full">
+            <div className="flex h-fit w-full border-b">
                 <div className="flex flex-col gap-2 p-4">
                     <h1 className="text-xl font-semibold text-foreground flex gap-2">
                         <span>{product.emoji}</span>
@@ -155,8 +161,7 @@ function Product({ product }: { product: ProductData }) {
                 className="flex flex-col gap-2 p-4 min-h-[12rem] max-h-[12rem] overflow-y-auto bg-primary text-primary-foreground"
                 dangerouslySetInnerHTML={{ __html: product.description }}
             />
-            <div className="grid place-items-center p-4 flex-1">
-                <div className="text-xl font-bold">Odbierz promocję</div>
+            <div className="grid place-items-center p-4 flex-1 border-b bg-primary">
                 <div
                     className={cn(
                         "h-auto mx-auto max-w-[184px] w-full relative"
@@ -182,8 +187,9 @@ function Product({ product }: { product: ProductData }) {
                     )}
                     <QRCode
                         size={256}
+                        fgColor="var(--primary)"
                         className={cn(
-                            "h-auto max-w-full w-full",
+                            "h-auto max-w-full w-full bg-primary text-primary",
                             isQrCodeLoading && "opacity-25"
                         )}
                         value={Buffer.from(",105 oan298gvpa").toString("hex")}
@@ -195,7 +201,17 @@ function Product({ product }: { product: ProductData }) {
     );
 }
 
-function Event({ event }: { event: EventData }) {
+function Event({
+    event,
+    id,
+    registerEvent,
+}: {
+    event: EventData;
+    id: number;
+    registerEvent: (id: number) => void;
+}) {
+    const [isAccepted, setIsAccepted] = React.useState(false);
+
     return (
         <>
             <div className="h-64 w-full relative border-b-2 border-foreground">
@@ -231,9 +247,37 @@ function Event({ event }: { event: EventData }) {
                 }}
             />
             <div className="grid place-items-center px-4 flex-1">
-                <div className="flex justify-between gap-8">
-                    <DropDrop />
-                    <Button className="text-md">Rezerwuj</Button>
+                <div>
+                    {!isAccepted ? (
+                        <div className="flex justify-between gap-8">
+                            <DropDrop />
+                            <Button
+                                onClick={() => {
+                                    setIsAccepted(true);
+                                    registerEvent(id);
+                                }}
+                                className="text-md"
+                            >
+                                Zapisz się
+                            </Button>
+                        </div>
+                    ) : (
+                        <div className="flex items-center gap-2">
+                            Zostałeś zapisany{" "}
+                            <motion.span
+                                initial={{ rotate: -60 }}
+                                animate={{ rotate: 0 }}
+                                transition={{
+                                    type: "spring",
+                                    stiffness: 200,
+                                    damping: 10,
+                                    duration: 2,
+                                }}
+                            >
+                                <Check />
+                            </motion.span>
+                        </div>
+                    )}
                 </div>
             </div>
         </>
