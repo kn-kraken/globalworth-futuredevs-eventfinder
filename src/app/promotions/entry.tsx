@@ -5,6 +5,7 @@ import Image from "next/image";
 export interface Promotion {
     id: number;
     type: "promotion";
+    locations: number[];
     title: string;
     img: string;
     date: Date;
@@ -15,6 +16,7 @@ export interface Promotion {
 export interface Event {
     id: number;
     type: "event";
+    locations: number[];
     title: string;
     img: string;
     date: Date;
