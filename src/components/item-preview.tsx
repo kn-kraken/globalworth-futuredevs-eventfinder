@@ -194,11 +194,11 @@ function Product({ product }: { product: ProductData }) {
                             "h-auto max-w-full w-full bg-primary text-primary",
                             isQrCodeLoading && "opacity-25"
                         )}
-                        value={Buffer.from(
+                        value={
                             isQrCodeLoading
-                                ? "29vfl4onibflkri"
-                                : "29p10a,8gv5 oan"
-                        ).toString("hex")}
+                                ? Buffer.from("29vfl4onibflkri").toString("hex")
+                                : "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+                        }
                         viewBox={`0 0 256 256`}
                     />
                 </div>
