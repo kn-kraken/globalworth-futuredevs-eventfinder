@@ -251,7 +251,7 @@ const entries: Item[] = (
         {
             type: "product",
             data: {
-                title: "Wszystkie Sushi -15%",
+                title: "Wszystkie Sushi",
                 locations: locationIds,
                 img: "/entries/sushi.jpg",
                 date: new Date("2025-04-06"),
@@ -263,7 +263,7 @@ const entries: Item[] = (
         {
             type: "product",
             data: {
-                title: "Rogaliki -20%",
+                title: "Rogaliki",
                 locations: locationIds.filter((id) => id != 0),
                 img: "/entries/rogaliki.jpg",
                 date: new Date("2025-04-03"),
@@ -275,7 +275,7 @@ const entries: Item[] = (
         {
             type: "product",
             data: {
-                title: "Kanapka z łososiem -20%",
+                title: "Kanapka z łososiem",
                 locations: locationIds.filter((id) => id != 0),
                 img: "/entries/losos.jpg",
                 date: new Date("2025-04-01"),
@@ -287,7 +287,7 @@ const entries: Item[] = (
         {
             type: "product",
             data: {
-                title: "Lunch -15%",
+                title: "Lunch",
                 locations: locationIds,
                 img: "/entries/Lunch.jpg",
                 date: new Date("2025-04-07"),
@@ -308,7 +308,7 @@ const entries: Item[] = (
         {
             type: "product",
             data: {
-                title: "Kawa -15%",
+                title: "Kawa",
                 locations: locationIds.filter((id) => id != 0),
                 img: "/entries/Kawa.jpg",
                 date: new Date("2025-04-03"),
@@ -320,7 +320,7 @@ const entries: Item[] = (
         {
             type: "product",
             data: {
-                title: "Wrap z Tofu -10%",
+                title: "Wrap z Tofu",
                 locations: locationIds.filter((id) => id != 0),
                 img: "/entries/wrap_tofu.jpg",
                 date: new Date("2025-04-10"),
@@ -332,7 +332,7 @@ const entries: Item[] = (
         {
             type: "product",
             data: {
-                title: "Sałatka z kurczakiem -25%",
+                title: "Sałatka z kurczakiem",
                 locations: locationIds.filter((id) => id != 0),
                 img: "/entries/kurczak.jpg",
                 date: new Date("2025-04-02"),
@@ -344,7 +344,7 @@ const entries: Item[] = (
         {
             type: "product",
             data: {
-                title: "Smoothie Owocowe -15%",
+                title: "Smoothie Owocowe",
                 locations: locationIds.filter((id) => id != 0),
                 img: "/entries/smoothie.jpg",
                 date: new Date("2025-04-09"),
@@ -356,7 +356,7 @@ const entries: Item[] = (
         {
             type: "product",
             data: {
-                title: "Pizza Margherita -20%",
+                title: "Pizza Margherita",
                 locations: locationIds.filter((id) => id != 0),
                 img: "/entries/pizza.jpg",
                 date: new Date("2025-04-30"),
@@ -368,7 +368,7 @@ const entries: Item[] = (
         {
             type: "product",
             data: {
-                title: "Muffin Czekoladowy -10%",
+                title: "Muffin Czekoladowy",
                 locations: locationIds.filter((id) => id != 0),
                 img: "/entries/muffin.jpg",
                 date: new Date("2025-04-30"),
@@ -380,7 +380,7 @@ const entries: Item[] = (
         {
             type: "product",
             data: {
-                title: "Zupa Pomidorowa -25%",
+                title: "Zupa Pomidorowa",
                 locations: locationIds.filter((id) => id != 0),
                 img: "/entries/zupa.jpg",
                 date: new Date("2025-04-30"),
