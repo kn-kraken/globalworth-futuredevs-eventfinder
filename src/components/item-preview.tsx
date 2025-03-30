@@ -32,7 +32,7 @@ export default function ItemPreview({
             animate={{ x: 0 }}
             className="bg-background fixed h-screen w-screen z-10 top-0 bottom-0 left-0 right-0"
             exit={{ x: "100vh" }}
-            transition={{ ease: "easeInOut", duration: 0.01 }}
+            transition={{ ease: "easeInOut", duration: 0.4 }}
         >
             <div className="w-full h-full relative flex flex-col text-md">
                 <button
