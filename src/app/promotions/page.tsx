@@ -120,6 +120,7 @@ export default function Promotions() {
                     />
                 )}
             </AnimatePresence>
+
             <div className="w-full pb-22 flex flex-col gap-3 items-center">
                 <Location
                     locations={locations}
@@ -137,47 +138,32 @@ export default function Promotions() {
                                 transition={{ duration: 0.3 }}
                             >
                                 <Section>Ulubione</Section>
+
                                 <div className="w-full overflow-auto">
-                                    <div className="flex w-fit gap-2 mx-1 mt-1 mb-4">
-                                        <AnimatePresence>
-                                            {favEntries.map((entry) => (
-                                                <motion.div
-                                                    key={entry.id}
-                                                    initial={{
-                                                        opacity: 0,
-                                                        scale: 0.9,
-                                                    }}
-                                                    animate={{
-                                                        opacity: 1,
-                                                        scale: 1,
-                                                    }}
-                                                    exit={{
-                                                        opacity: 0,
-                                                        scale: 0.9,
-                                                    }}
-                                                    transition={{
-                                                        duration: 0.3,
-                                                    }}
-                                                >
-                                                    <Entry
-                                                        item={entry}
-                                                        isFavourite={true}
-                                                        isRegistered={registeredEvents.includes(
-                                                            entry.id
-                                                        )}
-                                                        onFavoutiteClicked={() =>
-                                                            onFavouriteClicked(
-                                                                entry
-                                                            )
-                                                        }
-                                                        onClick={() =>
-                                                            setChosenItem(entry)
-                                                        }
-                                                    />
-                                                </motion.div>
-                                            ))}
-                                        </AnimatePresence>
-                                    </div>
+                                    <motion.div
+                                        layout
+                                        className="flex w-fit gap-2 mx-1 mt-1 mb-4"
+                                    >
+                                        {favEntries.map((entry) => (
+                                            <motion.div key={entry.id} layout>
+                                                <Entry
+                                                    item={entry}
+                                                    isFavourite={true}
+                                                    isRegistered={registeredEvents.includes(
+                                                        entry.id
+                                                    )}
+                                                    onFavoutiteClicked={() =>
+                                                        onFavouriteClicked(
+                                                            entry
+                                                        )
+                                                    }
+                                                    onClick={() =>
+                                                        setChosenItem(entry)
+                                                    }
+                                                />
+                                            </motion.div>
+                                        ))}
+                                    </motion.div>
                                 </div>
                             </motion.div>
                         )}
