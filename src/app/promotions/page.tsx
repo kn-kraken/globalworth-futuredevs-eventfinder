@@ -298,12 +298,13 @@ const entries: Item[] = (
         {
             type: "product",
             data: {
-                title: "Lunch -15%",
+                title: "Lunch",
                 locations: locationIds,
                 img: "/entries/Lunch.jpg",
                 date: new Date("2025-04-07"),
                 priceOld: 29.5,
                 priceNew: 25.0,
+                discount: "15%",
                 logo: "/barkoszyki.png",
                 company: "Bar Koszyki",
                 emoji: <CookingPot />,
