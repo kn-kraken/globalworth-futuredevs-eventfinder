@@ -2,7 +2,6 @@
 
 import { Button } from "@/components/ui/button";
 import { EventData, Item, ProductData } from "@/lib/types";
-import { randomBytes } from "crypto";
 import { motion } from "framer-motion";
 import { Calendar, Heart, Share2, X } from "lucide-react";
 import Image from "next/image";
@@ -17,14 +16,18 @@ import {
     DropdownMenuRadioGroup,
     DropdownMenuRadioItem,
 } from "@radix-ui/react-dropdown-menu";
-import { price } from "@/lib/utils";
+import { cn, price } from "@/lib/utils";
 
 export default function ItemPreview({
     item,
     close,
+    isFavourite = false,
+    onFavouriteClicked,
 }: {
     item: Item;
     close: () => void;
+    isFavourite?: boolean;
+    onFavouriteClicked?: () => void;
 }) {
     return (
         <motion.div
@@ -41,11 +44,31 @@ export default function ItemPreview({
                 >
                     <X className="text-primary-foreground w-6 h-6" />
                 </button>
-                <button
-                    onClick={close}
-                    className="p-2 absolute top-4 right-16 z-1 bg-black/70 grid place-items-center rounded-3xl"
-                >
+                <button className="p-2 absolute top-4 right-16 z-1 bg-black/70 grid place-items-center rounded-3xl">
                     <Share2 className="text-primary-foreground w-6 h-6" />
+                </button>
+                <button
+                    onClick={onFavouriteClicked}
+                    className="p-2 absolute top-4 right-4 z-1 bg-black/70 grid place-items-center rounded-3xl"
+                >
+                    <div className="relative cursor-pointer">
+                        <Heart
+                            className={cn(
+                                "top-0 left-0 text-primary-foreground",
+                                "transition-opacity",
+                                isFavourite && "opacity-0"
+                            )}
+                        />
+                        <Heart
+                            className={cn(
+                                "absolute top-0 left-0",
+                                "text-primary-foreground",
+                                "fill-primary-foreground",
+                                "transition-opacity",
+                                !isFavourite && "opacity-0"
+                            )}
+                        />
+                    </div>
                 </button>
 
                 {item.type == "product" ? (
@@ -61,12 +84,6 @@ export default function ItemPreview({
 function Product({ product }: { product: ProductData }) {
     return (
         <>
-            <button
-                onClick={close}
-                className="p-2 absolute top-4 right-4 z-1 bg-black/70 grid place-items-center rounded-3xl"
-            >
-                <Heart className="text-primary-foreground w-6 h-6" />
-            </button>
             <div className="h-64 w-full relative border-b-2 border-foreground">
                 <div className="absolute bottom-8 h-fit w-full mx-4 gap-4 z-2 flex items-center">
                     <div className="w-12 h-12 relative">
@@ -140,7 +157,7 @@ function Product({ product }: { product: ProductData }) {
                             maxWidth: "100%",
                             width: "100%",
                         }}
-                        value={randomBytes(16).toString("hex")}
+                        value={Buffer.from(",105 oan298gvpa").toString("hex")}
                         viewBox={`0 0 256 256`}
                     />
                 </div>
@@ -152,12 +169,6 @@ function Product({ product }: { product: ProductData }) {
 function Event({ event }: { event: EventData }) {
     return (
         <>
-            <button
-                onClick={close}
-                className="p-2 absolute top-4 right-4 z-1 bg-black/70 grid place-items-center rounded-3xl"
-            >
-                <Heart className="text-primary-foreground w-6 h-6" />
-            </button>
             <div className="h-64 w-full relative border-b-2 border-foreground">
                 <Image
                     src={event.img}

@@ -39,6 +39,10 @@ export default function Promotions() {
                     <ItemPreview
                         item={chosenItem}
                         close={() => setChosenItem(undefined)}
+                        isFavourite={favEntries.includes(chosenItem)}
+                        onFavouriteClicked={() =>
+                            onFavouriteClicked(chosenItem)
+                        }
                     />
                 )}
             </AnimatePresence>
