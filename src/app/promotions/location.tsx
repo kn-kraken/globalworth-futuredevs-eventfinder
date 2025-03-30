@@ -50,7 +50,7 @@ const locations = [
 ];
 
 export function Location() {
-    const [index, setIndex] = React.useState(26);
+    const [index, setIndex] = React.useState(0);
     const [isOpen, setIsOpen] = React.useState(false);
 
     return (

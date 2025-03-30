@@ -18,7 +18,7 @@ export interface Event {
     title: string;
     img: string;
     date: Date;
-    brief: string;
+    brief?: string;
 }
 
 export type EntryType = Promotion | Event;
@@ -60,7 +60,7 @@ export default function Entry({
                 </div>
                 <div className="pl-1 text-sm font-light">
                     <div className="flex items-center gap-2">
-                        <Calendar size={16} strokeWidth={1.5} />{" "}
+                        <Calendar size={16} strokeWidth={1.8} />{" "}
                         {entry.date.toLocaleDateString("pl-PL")}
                     </div>
                     {"brief" in entry && <div> {entry.brief}</div>}

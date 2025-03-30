@@ -3,7 +3,7 @@
 import { Location } from "./location";
 import Filters, { allFilterSlugs, FilterEnum } from "./filters";
 import { useState } from "react";
-import Entry, { EntryType, Promotion } from "./entry";
+import Entry, { EntryType } from "./entry";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Promotions() {
@@ -90,6 +90,7 @@ export default function Promotions() {
                     </div>
                 </div>
             </div>
+            <div className="pt-22"></div>
         </div>
     );
 }
@@ -195,5 +196,91 @@ const entries: EntryType[] = (
             priceOld: 14.0,
             priceNew: 10.5,
         },
+        {
+            title: "Napraw swój rower",
+            type: "event",
+            img: "/entries/rower.jpeg",
+            date: new Date("2025-04-11"),
+            brief: "Przygotuj swój rower na wiosnę dzięki kompleksowemu przeglądowi",
+        },
+        {
+            title: "Yoga",
+            type: "event",
+            img: "/entries/yoga.jpg",
+            date: new Date("2025-04-06"),
+            brief: "Relaks dla twojego ciała i umysłu",
+        },
+        {
+            title: "Zbiórka elektrośmieci",
+            type: "event",
+            img: "/entries/elektro.png",
+            date: new Date("2025-04-09"),
+            brief: "Oddaj swój zużyty sprzęt elektroniczny",
+        },
+        {
+            title: "Warsztaty florystyczne",
+            type: "event",
+            img: "/entries/flora.jpg",
+            date: new Date("2025-04-07"),
+            brief: "Poznaj tajniki tworzenia kompozycji z twoich ulubionych kwiatów",
+        },
+        {
+            title: "Warsztaty artystyczne",
+            type: "event",
+            img: "/entries/art.jpg",
+            date: new Date("2025-04-05"),
+            brief: "",
+        },
+        {
+            title: "Zajęcia fitness",
+            type: "event",
+            img: "/entries/fit.jpg",
+            date: new Date("2025-04-06"),
+            brief: "Rozruszaj swoje ciało po całym dniu za biurkiem",
+        },
+        {
+            title: "Warsztaty z wizażystką",
+            type: "event",
+            img: "/entries/wizaz.jpg",
+            date: new Date("2025-04-08"),
+            brief: "Poznaj tajniki makijażu",
+        },
+        {
+            title: "Warsztaty salsy",
+            type: "event",
+            img: "/entries/salsa.jpg",
+            date: new Date("2025-04-03"),
+            brief: "",
+        },
+        {
+            title: "Warsztaty customizacji odzieży",
+            type: "event",
+            img: "/entries/custom.jpg",
+            date: new Date("2025-04-08"),
+            brief: "Przenieś swój ulubiony motyw na ubrania",
+        },
+        {
+            title: "Zbiórka odzieży",
+            type: "event",
+            img: "/entries/odziez.jpg",
+            date: new Date("2025-04-07"),
+            brief: "Oddaj ubrania, których już dawno nie nosisz",
+        },
+        {
+            title: "Przerób swoją garderobę",
+            type: "event",
+            img: "/entries/garderoba.jpg",
+            date: new Date("2025-04-05"),
+            brief: "Stwórz coś nowego ze swoich  zużytych ubrań",
+        },
+        {
+            title: "Wirtualny wyścig",
+            type: "event",
+            img: "/entries/wyscig.jpg",
+            date: new Date("2025-04-11"),
+            brief: "Poczuj się jak w „Szybkich i wściekłych”",
+        },
     ] as const
-).map((entry, i) => ({ ...entry, id: i }));
+)
+    .toSorted((a, b) => a.date.valueOf() - b.date.valueOf())
+    .map((entry, i) => ({ ...entry, id: i }));

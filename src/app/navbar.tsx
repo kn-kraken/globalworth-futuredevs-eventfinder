@@ -1,16 +1,21 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
 type Page = "home" | "manage" | "promotions" | "history";
 
 export default function Navbar() {
-    const [activeButton, setActiveButton] = useState<Page>("home");
+    const path = usePathname();
+    const isPromotions = path.startsWith("/promotions");
+    const initialPage = isPromotions ? "promotions" : "home";
+
+    const [page, setPage] = useState<Page>(initialPage);
     const router = useRouter();
+
     function navigate(page: Page) {
-        setActiveButton(page);
+        setPage(page);
         router.push(page == "home" ? "/" : "/promotions");
     }
     return (
@@ -18,29 +23,26 @@ export default function Navbar() {
             className="absolute bottom-0 w-full bg-secondary rounded-t-4xl flex p-5 gap-5 justify-evenly text-secondary-foreground
         -foreground"
         >
-            <Button
-                isActive={activeButton == "home"}
-                onClick={() => navigate("home")}
-            >
+            <Button isActive={page == "home"} onClick={() => navigate("home")}>
                 <Lock />
                 Pulpit
             </Button>
             <Button
-                isActive={activeButton == "manage"}
+                isActive={page == "manage"}
                 onClick={() => navigate("manage")}
             >
                 <User />
                 Zarządzaj
             </Button>
             <Button
-                isActive={activeButton == "promotions"}
+                isActive={page == "promotions"}
                 onClick={() => navigate("promotions")}
             >
                 <QrCode />
                 Promocje
             </Button>
             <Button
-                isActive={activeButton == "history"}
+                isActive={page == "history"}
                 onClick={() => navigate("history")}
             >
                 <Clock />
