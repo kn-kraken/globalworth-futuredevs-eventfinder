@@ -23,13 +23,15 @@ export default function ItemPreview({
     close,
     isFavourite = false,
     onFavouriteClicked,
-    registerEvent,
+    isAccepted = false,
+    onAcceptedChanged,
 }: {
     item: Item;
     close: () => void;
     isFavourite?: boolean;
     onFavouriteClicked?: () => void;
-    registerEvent: (id: number) => void;
+    isAccepted?: boolean;
+    onAcceptedChanged?: (isAccepted: boolean) => void;
 }) {
     return (
         <motion.div
@@ -78,8 +80,8 @@ export default function ItemPreview({
                 ) : (
                     <Event
                         event={item.data}
-                        id={item.id}
-                        registerEvent={registerEvent}
+                        isAccepted={isAccepted}
+                        onAcceptedChanged={onAcceptedChanged}
                     />
                 )}
             </div>
@@ -207,15 +209,13 @@ function Product({ product }: { product: ProductData }) {
 
 function Event({
     event,
-    id,
-    registerEvent,
+    isAccepted = false,
+    onAcceptedChanged,
 }: {
     event: EventData;
-    id: number;
-    registerEvent: (id: number) => void;
+    isAccepted?: boolean;
+    onAcceptedChanged?: (isAccepted: boolean) => void;
 }) {
-    const [isAccepted, setIsAccepted] = React.useState(false);
-
     return (
         <>
             <div className="h-64 w-full relative border-b border-foreground">
@@ -261,9 +261,9 @@ function Event({
                         <div className="flex justify-between gap-8">
                             <DropDrop />
                             <Button
+                                key="1"
                                 onClick={() => {
-                                    setIsAccepted(true);
-                                    registerEvent(id);
+                                    onAcceptedChanged?.call(null, true);
                                 }}
                                 className="text-md"
                             >
@@ -271,20 +271,32 @@ function Event({
                             </Button>
                         </div>
                     ) : (
-                        <div className="flex items-center gap-2">
-                            Zostałeś zapisany{" "}
-                            <motion.span
-                                initial={{ rotate: -60 }}
-                                animate={{ rotate: 0 }}
-                                transition={{
-                                    type: "spring",
-                                    stiffness: 200,
-                                    damping: 10,
-                                    duration: 2,
+                        <div className="flex flex-col gap-2">
+                            <div className="flex items-center gap-2">
+                                Zostałeś zapisany{" "}
+                                <motion.span
+                                    initial={{ rotate: -60 }}
+                                    animate={{ rotate: 0 }}
+                                    transition={{
+                                        type: "spring",
+                                        stiffness: 200,
+                                        damping: 10,
+                                        duration: 2,
+                                    }}
+                                >
+                                    <Check />
+                                </motion.span>
+                            </div>
+                            <Button
+                                key="2"
+                                onClick={() => {
+                                    onAcceptedChanged?.call(null, false);
                                 }}
+                                className="text-md"
+                                variant="outline"
                             >
-                                <Check />
-                            </motion.span>
+                                Wypisz się
+                            </Button>
                         </div>
                     )}
                 </div>

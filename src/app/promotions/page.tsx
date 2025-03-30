@@ -75,6 +75,7 @@ export default function Promotions() {
                 <EventConfirmation
                     item={confirmation as unknown as Event}
                     onClose={(didConfirm) => {
+                        console.log(didConfirm);
                         if (!didConfirm) {
                             setRegisteredEvents((prev) =>
                                 prev.filter((id) => id != confirmation.id)
@@ -96,9 +97,25 @@ export default function Promotions() {
                         onFavouriteClicked={() =>
                             onFavouriteClicked(chosenItem)
                         }
-                        registerEvent={(id) => {
-                            setFavourites((prev) => [chosenItem.id, ...prev]);
-                            setRegisteredEvents((prev) => [...prev, id]);
+                        isAccepted={registeredEvents.includes(chosenItem.id)}
+                        onAcceptedChanged={(isAccepted) => {
+                            if (isAccepted) {
+                                setFavourites((prev) => [
+                                    chosenItem.id,
+                                    ...prev,
+                                ]);
+                                setRegisteredEvents((prev) => [
+                                    ...prev,
+                                    chosenItem.id,
+                                ]);
+                            } else {
+                                setFavourites((prev) =>
+                                    prev.filter((id) => id != chosenItem.id)
+                                );
+                                setRegisteredEvents((prev) =>
+                                    prev.filter((id) => id != chosenItem.id)
+                                );
+                            }
                         }}
                     />
                 )}
@@ -391,7 +408,7 @@ const entries: Item[] = (
                 title: "Yoga",
                 locations: locationIds.filter((id) => id != 0),
                 img: "/entries/yog.webp",
-                date: new Date("2025-04-06"),
+                date: new Date("2025-03-31"),
                 emoji: <Dumbbell />,
                 brief: "Relaks dla twojego ciała i umysłu",
                 description:

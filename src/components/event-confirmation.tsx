@@ -20,12 +20,7 @@ export function EventConfirmation({
     onClose?: (didConfirm: boolean) => void;
 }) {
     return (
-        <AlertDialog
-            open
-            onOpenChange={(open) => {
-                if (!open) onClose?.call(null, false);
-            }}
-        >
+        <AlertDialog open>
             <AlertDialogContent className="text-start">
                 <AlertDialogHeader>
                     <AlertDialogTitle className="">
@@ -49,7 +44,7 @@ export function EventConfirmation({
                 <AlertDialogFooter>
                     <AlertDialogCancel
                         className="cursor-pointer"
-                        onClick={() => onClose?.call(null, true)}
+                        onClick={() => onClose?.call(null, false)}
                     >
                         Wypisz się
                     </AlertDialogCancel>
