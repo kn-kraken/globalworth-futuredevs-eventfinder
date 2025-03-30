@@ -7,8 +7,9 @@ import Entry from "./entry";
 import { motion, AnimatePresence } from "framer-motion";
 import ItemPreview from "@/components/item-preview";
 import { CookingPot, ShoppingBasket } from "lucide-react";
-import { Item } from "@/lib/types";
+import { Event, Item } from "@/lib/types";
 import PushNotification from "@/components/notification";
+import { EventConfirmation } from "@/components/event-confirmation";
 
 export default function Promotions() {
     const [chosenLocId, setChosenLocId] = useState(0);
@@ -35,6 +36,10 @@ export default function Promotions() {
         return () => window.removeEventListener("keydown", onKey);
     });
 
+    const [confirmation, setConfirmation] = useState<Item | undefined>(
+        undefined
+    );
+
     const filtered = entries
         .filter(({ data }) => data.locations.includes(chosenLocId))
         .filter(({ type }) => filters.includes(type));
@@ -51,7 +56,7 @@ export default function Promotions() {
     return (
         <div
             className="w-screen h-screen relative p-6 overflow-y-auto"
-            onClick={() => {
+            onDoubleClick={() => {
                 setNotification(yoga);
             }}
         >
@@ -61,10 +66,19 @@ export default function Promotions() {
                         title="Potwierdź obecność na jutrzejszym wydarzeniu!"
                         message={notification.data.title}
                         onClose={() => setNotification(undefined)}
-                        onClick={() => setNotification(undefined)}
+                        onClick={() => {
+                            setConfirmation(notification);
+                            setNotification(undefined);
+                        }}
                     />
                 )}
             </AnimatePresence>
+            {confirmation !== undefined && (
+                <EventConfirmation
+                    item={confirmation as unknown as Event}
+                    onClose={() => setConfirmation(undefined)}
+                />
+            )}
             <AnimatePresence>
                 {chosenItem !== undefined && (
                     <ItemPreview
